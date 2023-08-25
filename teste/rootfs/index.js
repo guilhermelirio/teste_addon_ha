@@ -2,29 +2,20 @@ let error = false
 
 const FALSY_VALUES = ['false', 'no', '0', 'null', 'undefined']
 const convert = {
-    'json': v => JSON.parse(v),
     'string': v => v || "",
     'number': v => v || "",
     'bool': v => v && !FALSY_VALUES.includes(v.toLowerCase().trim()) || false
 }
 
 const constants = [
-    { name: 'login', type: 'string', required: true, value: "" },
-    { name: 'password', type: 'string', required: true, value: "" },
+    { name: 'login', type: 'string' },
+    { name: 'password', type: 'string' }
+].reduce((acc, { name, type }) => ({
+    ...acc,
+    [name]: convert[type](process.env[name])
+}), {})
 
-].reduce((acc, { name, type, value, required }) => {
-    let val = convert[type](process.env[name] || value || '')
-
-    if (required && (val === null || val === undefined || val === '')) {
-        error = true
-        console.log(name, 'Required')
-    }
-
-    return {
-        ...acc,
-        [name]: value
-    }
-}, {})
+console.log(constants)
 
 try {
     // Seu código que pode lançar uma exceção
