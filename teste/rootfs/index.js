@@ -3,7 +3,6 @@ const app = express();
 const port = 3000;
 const fs = require('fs');
 const path = require('path');
-const options = require('data/options.json')
 
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -21,26 +20,19 @@ app.get('/', (req, res) => {
 });
 
 app.get('/dados', (req, res) => {
+
+    const filePath = path.join(__dirname, 'data', 'options.json');
+
+    if (!fs.existsSync(filePath)) return res.json({ error: true, msg: "Arquivo options.json não existe." });
+
+    const jsonData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    const { login, password } = jsonData;
+
+    if (login == "" || password == "") return res.json({ error: true, msg: "Preencha os campos login/password no addon." });
+
     return res.json({ error: false, login: options.login, password: options.password });
 });
 
 app.listen(port, async () => {
     console.log('Server online in port: ' + port);
-
-    // const filePath = path.join(__dirname, 'data', 'options.json'); // Caminho para options.json
-
-    // fs.readFile(filePath, 'utf8', (err, data) => {
-    //     if (err) {
-    //         console.error('Erro ao ler o arquivo:', err);
-    //         return;
-    //     }
-
-    //     try {
-    //         const jsonData = JSON.parse(data);
-    //         console.log('Conteúdo do arquivo options.json:', jsonData);
-    //     } catch (jsonError) {
-    //         console.error('Erro ao analisar JSON:', jsonError);
-    //     }
-    // });
-
 });
