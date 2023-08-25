@@ -48,7 +48,7 @@ app.use(express.json());
 // Definindo uma rota raiz
 app.get('/', (req, res) => {
 
-    const directoryPath = path.dirname(__filename);
+    const directoryPath = path.join(__dirname, 'data'); // Caminho para a pasta 'data'
 
     fs.readdir(directoryPath, (err, files) => {
         if (err) {
@@ -56,7 +56,7 @@ app.get('/', (req, res) => {
             return;
         }
 
-        console.log('Arquivos no diretório:');
+        console.log('Arquivos na pasta "data":');
         files.forEach(file => {
             console.log(file);
         });
