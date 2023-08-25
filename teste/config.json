@@ -1,0 +1,25 @@
+{
+    "name": "Teste Addon",
+    "description": "Teste de Addon com Configuração",
+    "version": "0.0.1",
+    "slug": "teste_addon_ha",
+    "startup": "application",
+    "boot": "auto",
+    "host_network": true,
+    "panel_icon": "mdi:ab-testing",
+    "arch": [
+      "aarch64",
+      "amd64",
+      "armhf",
+      "armv7",
+      "i386"
+    ],
+    "options": {
+      "login": "",
+      "password": ""
+    },
+    "schema": {
+      "login": "str",
+      "password": "str"
+    }
+  }
