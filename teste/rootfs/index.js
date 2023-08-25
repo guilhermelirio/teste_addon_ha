@@ -30,7 +30,7 @@ app.get('/dados', (req, res) => {
 
     if (login == "" || password == "") return res.json({ error: true, msg: "Preencha os campos login/password no addon." });
 
-    return res.json({ error: false, login: options.login, password: options.password });
+    return res.json({ error: false, login: login, password: password });
 });
 
 app.listen(port, async () => {
