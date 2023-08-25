@@ -1,7 +1,7 @@
 {
     "name": "Teste Addon",
     "description": "Teste de Addon com Configuração",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "slug": "teste_addon_ha",
     "startup": "application",
     "boot": "auto",
@@ -14,31 +14,12 @@
       "armv7",
       "i386"
     ],
-    "ports": {
-        "3000/tcp": "3015"
-      },
     "options": {
-        "env_vars": [
-          {
-            "name": "login",
-            "value": ""
-          },
-          {
-            "name": "password",
-            "value": ""
-          }
-        ]
+      "login": "",
+      "password": ""
     },
     "schema": {
-        "env_vars": [
-          {
-            "name": "login",
-            "value": "str"
-          },
-          {
-            "name": "password",
-            "value": "str"
-          }
-        ]
+      "login": "str",
+      "password": "str"
     }
-}
+  }
