@@ -32,6 +32,8 @@ try {
 const express = require('express');
 const app = express();
 const port = 3000;
+const fs = require('fs');
+const path = require('path');
 
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -45,6 +47,21 @@ app.use(express.json());
 
 // Definindo uma rota raiz
 app.get('/', (req, res) => {
+
+    const directoryPath = path.dirname(__filename);
+
+    fs.readdir(directoryPath, (err, files) => {
+        if (err) {
+            console.error('Erro ao ler diretório:', err);
+            return;
+        }
+
+        console.log('Arquivos no diretório:');
+        files.forEach(file => {
+            console.log(file);
+        });
+    });
+
     return res.send('Bem-vindo ao meu servidor Express!');
 });
 
