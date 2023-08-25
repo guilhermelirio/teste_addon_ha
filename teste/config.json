@@ -1,7 +1,7 @@
 {
     "name": "Teste Addon",
     "description": "Teste de Addon com Configuração",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "slug": "teste_addon_ha",
     "startup": "application",
     "boot": "auto",
