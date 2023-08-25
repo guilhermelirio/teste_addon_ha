@@ -48,19 +48,19 @@ app.use(express.json());
 // Definindo uma rota raiz
 app.get('/', (req, res) => {
 
-    const directoryPath = path.join(__dirname, 'data'); // Caminho para a pasta 'data'
+    // const directoryPath = path.join(__dirname, 'data'); // Caminho para a pasta 'data'
 
-    fs.readdir(directoryPath, (err, files) => {
-        if (err) {
-            console.error('Erro ao ler diretório:', err);
-            return;
-        }
+    // fs.readdir(directoryPath, (err, files) => {
+    //     if (err) {
+    //         console.error('Erro ao ler diretório:', err);
+    //         return;
+    //     }
 
-        console.log('Arquivos na pasta "data":');
-        files.forEach(file => {
-            console.log(file);
-        });
-    });
+    //     console.log('Arquivos na pasta "data":');
+    //     files.forEach(file => {
+    //         console.log(file);
+    //     });
+    // });
 
     return res.send('Bem-vindo ao meu servidor Express!');
 });
@@ -71,4 +71,21 @@ app.get('/dados', (req, res) => {
 
 app.listen(port, async () => {
     console.log('Server online in port: ' + port);
+
+    const filePath = path.join(__dirname, 'data', 'options.json'); // Caminho para options.json
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Erro ao ler o arquivo:', err);
+            return;
+        }
+
+        try {
+            const jsonData = JSON.parse(data);
+            console.log('Conteúdo do arquivo options.json:', jsonData);
+        } catch (jsonError) {
+            console.error('Erro ao analisar JSON:', jsonError);
+        }
+    });
+
 });
