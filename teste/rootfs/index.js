@@ -9,13 +9,13 @@ const convert = {
 }
 
 const constants = [
-    { name: 'login', type: 'string', required: true },
-    { name: 'password', type: 'string', required: true },
+    { name: 'login', type: 'string', required: true, value: "" },
+    { name: 'password', type: 'string', required: true, value: "" },
 
-].reduce((acc, { name, type, defaultValue, required }) => {
-    let value = convert[type](process.env[name] || defaultValue || '')
+].reduce((acc, { name, type, value, required }) => {
+    let val = convert[type](process.env[name] || value || '')
 
-    if (required && (value === null || value === undefined || value === '')) {
+    if (required && (val === null || val === undefined || val === '')) {
         error = true
         console.log(name, 'Required')
     }
